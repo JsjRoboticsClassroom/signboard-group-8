@@ -1,7 +1,7 @@
 package nyc.c4q.ac21.signboard;
 
 import java.util.Random;
-
+//Main
 public class Main {
     /**
      * Draws a scene with a scrolling multicolor zig-zag ribbon.
