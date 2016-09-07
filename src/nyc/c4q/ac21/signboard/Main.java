@@ -285,48 +285,47 @@ public class Main {
         int width = board.getWidth();
         int y = board.getHeight() / 2;
 
-        String str0 = "  /        \\";
-        String str1 = "  |        | ";
-        String str2 = "  /'---'--`\\";
-        String str3 = " |          |";
-        String str4 = "\\.--.---.-./";
-        String str5 = " (_.--._.-._)";
-        String str6 = "  \\=-=-=-/  ";
-        String str7 = "   \\=-=-/   ";
+        String str0 = "  /        \\ ";
+        String str1 = "  |        |  ";
+        String str2 = "  /'---'--`\\ ";
+        String str3 = " |          | ";
+        String str4 = " \\.--.---.-./";
+        String str5 = " (_.--._.-._) ";
+        String str6 = "   \\=-=-=-/  ";
+        String str7 = "    \\=-=-/   ";
 
 
         for (int i = 0; i < 7; i++) {
             SignBoard.Frame frame = board.newFrame();
 
             if (i == 0) {
-                frame.write(width / 2, 7, str6);
-                frame.write(width / 2, 8, str7);
+                frame.write(width / 2, 6, str6);
+                frame.write(width / 2, 7, str7);
             } else if (i == 1) {
                 frame.write(width / 2, 0, str5);
-
-                frame.write(width / 2, 7, str6);
-                frame.write(width / 2, 8, str7);
+                frame.write(width / 2, 6, str6);
+                frame.write(width / 2, 7, str7);
             } else if (i == 2) {
                 frame.write(width / 2, 0, str4);
                 frame.write(width / 2, 1, str5);
 
-                frame.write(width / 2, 7, str6);
-                frame.write(width / 2, 8, str7);
+                frame.write(width / 2, 6, str6);
+                frame.write(width / 2, 7, str7);
             } else if (i == 3) {
                 frame.write(width / 2, 0, str3);
                 frame.write(width / 2, 1, str4);
                 frame.write(width / 2, 2, str5);
 
-                frame.write(width / 2, 7, str6);
-                frame.write(width / 2, 8, str7);
+                frame.write(width / 2, 6, str6);
+                frame.write(width / 2, 7, str7);
             } else if (i == 4) {
                 frame.write(width / 2, 0, str2);
                 frame.write(width / 2, 1, str3);
                 frame.write(width / 2, 2, str4);
                 frame.write(width / 2, 3, str5);
 
-                frame.write(width / 2, 7, str6);
-                frame.write(width / 2, 8, str7);
+                frame.write(width / 2, 6, str6);
+                frame.write(width / 2, 7, str7);
             } else if (i == 5) {
                 frame.write(width / 2, 0, str1);
                 frame.write(width / 2, 1, str2);
@@ -334,8 +333,8 @@ public class Main {
                 frame.write(width / 2, 3, str4);
                 frame.write(width / 2, 4, str5);
 
-                frame.write(width / 2, 7, str6);
-                frame.write(width / 2, 8, str7);
+                frame.write(width / 2, 6, str6);
+                frame.write(width / 2, 7, str7);
             } else if (i == 6) {
                 frame.write(width / 2, 0, str0);
                 frame.write(width / 2, 1, str1);
@@ -344,8 +343,8 @@ public class Main {
                 frame.write(width / 2, 4, str4);
                 frame.write(width / 2, 5, str5);
 
-                frame.write(width / 2, 7, str6);
-                frame.write(width / 2, 8, str7);
+                frame.write(width / 2, 6, str6);
+                frame.write(width / 2, 7, str7);
             }
             frame.finish(0.25);
         }
