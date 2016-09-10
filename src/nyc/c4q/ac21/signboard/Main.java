@@ -307,9 +307,9 @@ public class Main {
             frame.setYellow();
     }
 
-    public static void fallingConeScene(SignBoard board, TextFrameReader scene1, TextFrameReader scene2) {
-        int leftPosition = board.getWidth() / 6;
-        int rightPosition = board.getWidth() - 15;
+    public static void fallingConeScene(SignBoard board, FrameTextReader scene1, FrameTextReader scene2) {
+        int leftPosition = board.getWidth() / 2 - 24;
+        int rightPosition = board.getWidth() / 2 + 15;
 
         //falling cone animation
         int i = 0;
@@ -351,7 +351,7 @@ public class Main {
         }
     }
 
-    public static void scrollHugeCone(SignBoard board, TextFrameReader scene1) {
+    public static void scrollHugeScene(SignBoard board, FrameTextReader scene1) {
         int width = board.getWidth();
         int y = board.getHeight();
 
@@ -393,9 +393,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         SignBoard signBoard = new SignBoard(8);
-        TextFrameReader fallingConeFrames = new TextFrameReader("falling_cone.txt");
-        TextFrameReader fallingConeWordFrames = new TextFrameReader("falling_cone_words.txt");
-        TextFrameReader hugeConeFrames = new TextFrameReader("huge_cone.txt");
+        FrameTextReader fallingCone = new FrameTextReader("falling_cone.txt");
+        FrameTextReader fallingConeText = new FrameTextReader("falling_cone_words.txt");
+        FrameTextReader hugeCone = new FrameTextReader("huge_cone.txt");
 
         // Run the sign board forever.
         while (true) {
@@ -404,10 +404,10 @@ public class Main {
             //ribbonScene(signBoard, 48);
             //flashFreshHotScene(signBoard, 8);
 
-            iceCreamAnimation(signBoard, 16);
-            threeConeScene(signBoard);
-            fallingConeScene(signBoard, fallingConeFrames, fallingConeWordFrames);
-            scrollHugeCone(signBoard, hugeConeFrames);
+            //iceCreamAnimation(signBoard, 16);
+            //threeConeScene(signBoard);
+            //fallingConeScene(signBoard, fallingCone, fallingConeText);
+            scrollHugeScene(signBoard, hugeCone);
         }
     }
 }

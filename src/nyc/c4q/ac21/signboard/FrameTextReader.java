@@ -15,11 +15,11 @@ import java.util.ArrayList;
  * (-_-)
  * --
  */
-public class TextFrameReader {
+public class FrameTextReader {
 
     public List<String> frameList = new ArrayList<String>();
 
-    public TextFrameReader (String fileName) throws IOException {
+    public FrameTextReader(String fileName) throws IOException {
         readTextFile(fileName);
 
     }
