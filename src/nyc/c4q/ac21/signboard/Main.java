@@ -313,13 +313,13 @@ public class Main {
 
         //falling cone animation
         int i = 0;
-        while (i < scene1.textFrames.size()) {
+        while (i < scene1.frameList.size()) {
             SignBoard.Frame frame = board.newFrame();
             setRandomColor(frame);
 
             for (int j = 0; j < 8; j++) {
 
-                frame.write(rightPosition, j, scene1.textFrames.get(i));
+                frame.write(rightPosition, j, scene1.frameList.get(i));
                 i++;
             }
 
@@ -329,20 +329,20 @@ public class Main {
         //one free scoop words after falling cone animation
         int cycles = 4;
         i = 0;
-        while (i < scene2.textFrames.size()) {
+        while (i < scene2.frameList.size()) {
             SignBoard.Frame frame = board.newFrame();
             setRandomColor(frame);
             int k = 8;
             for (int j = 0; j < 8; j++) {
-                frame.write(leftPosition, j, scene2.textFrames.get(i));
+                frame.write(leftPosition, j, scene2.frameList.get(i));
 
-                frame.write(rightPosition, j, scene1.textFrames.get(scene1.textFrames.size()-k));
+                frame.write(rightPosition, j, scene1.frameList.get(scene1.frameList.size()-k));
                 k--;
                 i++;
 
             }
 
-            if (i == scene2.textFrames.size() && cycles != 0) {
+            if (i == scene2.frameList.size() && cycles != 0) {
                 i = 0;
                 cycles--;
             }
@@ -355,97 +355,47 @@ public class Main {
         int width = board.getWidth();
         int y = board.getHeight();
 
-        for (int i = 0; i < scene1.textFrames.size() + 8; i++) {
+        for (int i = 0; i < scene1.frameList.size() + 8; i++) {
             SignBoard.Frame frame = board.newFrame();
             setRandomColor(frame);
-           /* if (i == 0)
-                frame.write(0,7, scene1.textFrames.get(0));
-            else if (i == 1) {
-                frame.write(0,6, scene1.textFrames.get(0));
-                frame.write(0,7, scene1.textFrames.get(1));
-            }
-            else if (i == 2) {
-                frame.write(0,5, scene1.textFrames.get(0));
-                frame.write(0,6, scene1.textFrames.get(1));
-                frame.write(0,7, scene1.textFrames.get(2));
-            }
-            else if (i == 3) {
-                frame.write(0,4, scene1.textFrames.get(0));
-                frame.write(0,5, scene1.textFrames.get(1));
-                frame.write(0,6, scene1.textFrames.get(2));
-                frame.write(0,7, scene1.textFrames.get(3));
-            }
-            else if (i == 4) {
-                frame.write(0,3, scene1.textFrames.get(0));
-                frame.write(0,4, scene1.textFrames.get(1));
-                frame.write(0,5, scene1.textFrames.get(2));
-                frame.write(0,6, scene1.textFrames.get(3));
-                frame.write(0,7, scene1.textFrames.get(4));
-            }
-            else if (i == 5) {
-                frame.write(0,2, scene1.textFrames.get(0));
-                frame.write(0,3, scene1.textFrames.get(1));
-                frame.write(0,4, scene1.textFrames.get(2));
-                frame.write(0,5, scene1.textFrames.get(3));
-                frame.write(0,6, scene1.textFrames.get(4));
-                frame.write(0,7, scene1.textFrames.get(5));
-            }
-            else if (i == 6) {
-                frame.write(0,1, scene1.textFrames.get(0));
-                frame.write(0,2, scene1.textFrames.get(1));
-                frame.write(0,3, scene1.textFrames.get(2));
-                frame.write(0,4, scene1.textFrames.get(3));
-                frame.write(0,5, scene1.textFrames.get(4));
-                frame.write(0,6, scene1.textFrames.get(5));
-                frame.write(0,7, scene1.textFrames.get(6));
-            }*/
-
-/*
-           else if (i == 55) {
-                frame.write(0, 0, scene1.textFrames.get(48));
-                frame.write(0, 1, scene1.textFrames.get(49));
-                frame.write(0, 2, scene1.textFrames.get(50));
-                frame.write(0, 3, scene1.textFrames.get(51));
-                frame.write(0, 4, scene1.textFrames.get(52));
-                frame.write(0, 5, scene1.textFrames.get(53));
-               frame.write(0, 6, scene1.textFrames.get(54));
-            }*/
 
             if (i <= 6) {
+                //coming in from the bottom
                 int h = 7;
                 int f = i;
                 for (int g = 0; g <= i; g++) {
-                    frame.write(0, h, scene1.textFrames.get(f));
+                    frame.write(0, h, scene1.frameList.get(f));
                     h--;
                     f--;
                 }
             }
-
-            else if (i < scene1.textFrames.size()) {
+            else if (i < scene1.frameList.size()) {
+                //scrolling fully on the board
                 int k = 7;
                 for (int j = 0; j < 8; j++) {
-                    frame.write(0, j, scene1.textFrames.get(i - k));
+                    frame.write(0, j, scene1.frameList.get(i - k));
                     k--;
                 }
             }
-            else if (i >= scene1.textFrames.size()) { //55
+            else if (i >= scene1.frameList.size()) { //55
+                //scrolling out above the board
                 int h = 0;
                 int k = i - 7; //k = 55      55 - 7 = 48
-                for (int j = scene1.textFrames.size() + 7; j > i; j--) { //j = 54+7 = 61, 61 > 55,
-                    frame.write(0, h, scene1.textFrames.get(k));   //h = 0, k = 48
+                for (int j = scene1.frameList.size() + 7; j > i; j--) { //j = 54+7 = 61, 61 > 55,
+                    frame.write(0, h, scene1.frameList.get(k));   //h = 0, k = 48
                     h++;
                     k++;
                 }
             }
-            frame.finish(.20);
+            frame.finish(.02);
         }
     }
 
     public static void main(String[] args) throws IOException {
         SignBoard signBoard = new SignBoard(8);
-        TextFrameReader coneAnimationScene1 = new TextFrameReader("falling_cone.txt");
-        TextFrameReader coneAnimationScene2 = new TextFrameReader("falling_cone_words.txt");
-        TextFrameReader hugeConeAnimation = new TextFrameReader("huge_cone.txt");
+        TextFrameReader fallingConeFrames = new TextFrameReader("falling_cone.txt");
+        TextFrameReader fallingConeWordFrames = new TextFrameReader("falling_cone_words.txt");
+        TextFrameReader hugeConeFrames = new TextFrameReader("huge_cone.txt");
 
         // Run the sign board forever.
         while (true) {
@@ -454,11 +404,10 @@ public class Main {
             //ribbonScene(signBoard, 48);
             //flashFreshHotScene(signBoard, 8);
 
-            //iceCreamAnimation(signBoard, 16);
-            //threeConeScene(signBoard);
-            //fallingConeScene(signBoard, coneAnimationScene1, coneAnimationScene2);
-
-            scrollHugeCone(signBoard, hugeConeAnimation);
+            iceCreamAnimation(signBoard, 16);
+            threeConeScene(signBoard);
+            fallingConeScene(signBoard, fallingConeFrames, fallingConeWordFrames);
+            scrollHugeCone(signBoard, hugeConeFrames);
         }
     }
 }

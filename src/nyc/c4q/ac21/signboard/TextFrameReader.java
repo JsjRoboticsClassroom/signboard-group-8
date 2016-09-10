@@ -4,8 +4,20 @@ import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Reads a text file and stores each line that is not marked with "--" into a list.
+ *
+ * Example of 2 frames in text separated by "--".
+ * ()_()
+ * (^_^)
+ * --
+ * ()_()
+ * (-_-)
+ * --
+ */
 public class TextFrameReader {
-    public List<String> textFrames = new ArrayList<String>();
+
+    public List<String> frameList = new ArrayList<String>();
 
     public TextFrameReader (String fileName) throws IOException {
         readTextFile(fileName);
@@ -21,7 +33,7 @@ public class TextFrameReader {
             String lineData = null;
             while( ( lineData = br.readLine() ) != null) {
                 if (!lineData.equals("--"))
-                    textFrames.add(lineData);
+                    frameList.add(lineData);
             }
         } finally {
             if (fr != null) fr.close();
