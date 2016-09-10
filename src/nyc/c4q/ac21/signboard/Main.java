@@ -1,6 +1,7 @@
-package nyc.c4q.ac21.signboard;
 
-import java.util.Random;
+        package nyc.c4q.ac21.signboard;
+
+        import java.util.Random;
 
 public class Main {
     /**
@@ -111,19 +112,87 @@ public class Main {
                 frame.write(rightPosition, y + 2, "H  H  OO   TT ");
             }
 
-            frame.finish(0.25);
         }
     }
+
+    public static void airplaneScene(SignBoard board) {
+        int w = board.getWidth();
+        int y = board.getHeight() / 2;
+
+
+
+
+        String str0 = " ll------------------------------ll                                  ";
+        String str1 = "  ll           o __   ___         ll      __                         ";
+        String str2 = "   ll          |(___ (__/_         ll     | ll                       ";
+        String str3 = "      >__   __   ___   __   __ __    >----|  ll       ______         ";
+        String str4 = "   // (___ |  ' (__/_ (__( |  )  ) //     --- ll_____/**|_|_ll____  |";
+        String str5 = "  //       VANILLA  CHOCOLATE     //        ll_______ --------- __>-}";
+        String str6 = " //------------------------------//            /  ll_____|_____/   | ";
+        String str7 = "                                               *         |           ";
+
+        int i = 0;
+        for (int x = -str2.length(); x <= w; ++x) {
+            SignBoard.Frame frame = board.newFrame();
+
+
+            if (x >= w)
+                break;
+            frame.setRed();
+            if (x < 0) {
+                // Scrolling on to the left side.
+
+                frame.write(0, y - 4, str0.substring(-x));
+                frame.write(0, y - 3, str1.substring(-x));
+                frame.write(0, y - 2, str2.substring(-x));
+                frame.write(0, y - 1, str3.substring(-x));
+                frame.write(0, y, str4.substring(-x));
+                frame.write(0, y + 1, str5.substring(-x));
+                frame.write(0, y + 2, str6.substring(-x));
+                frame.write(0, y + 3, str7.substring(-x));
+            } else if (x + str1.length() <= w) {
+
+                frame.setYellow();
+                frame.write(x, y - 4, str0);
+                frame.write(x, y - 3, str1);
+                frame.write(x, y - 2, str2);
+                frame.write(x, y - 1, str3);
+                frame.write(x, y, str4);
+                frame.write(x, y + 1, str5);
+                frame.write(x, y + 2, str6);
+                frame.write(x, y + 3, str7);
+            } else {
+
+                frame.setRed();
+                // Scrolling off the board.
+                frame.write(x, y - 4, str0.substring(0, w - x));
+                frame.write(x, y - 3, str1.substring(0, w - x));
+                frame.write(x, y - 2, str2.substring(0, w - x));
+                frame.write(x, y - 1, str3.substring(0, w - x));
+                frame.write(x, y, str4.substring(0, w - x));
+                frame.write(x, y + 1, str5.substring(0, w - x));
+                frame.write(x, y + 2, str6.substring(0, w - x));
+                frame.write(x, y + 3, str7.substring(0, w - x));
+            }
+
+            frame.finish(0.02);
+        }
+    }
+
+
+
 
     public static void main(String[] args) {
         SignBoard signBoard = new SignBoard(8);
 
         // Run the sign board forever.
         while (true) {
-            ribbonScene(signBoard, 48);
-            scrollTextScene(signBoard, "###  F A L A F E L  ###");
-            ribbonScene(signBoard, 48);
-            flashFreshHotScene(signBoard, 8);
+//            ribbonScene(signBoard, 48);
+//            scrollTextScene(signBoard, "###  F A L A F E L  ###");
+//            ribbonScene(signBoard, 48);
+//            flashFreshHotScene(signBoard, 8);
+
+            airplaneScene(signBoard);
         }
     }
 }
