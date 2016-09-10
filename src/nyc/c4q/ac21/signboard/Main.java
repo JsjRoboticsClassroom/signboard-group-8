@@ -404,9 +404,9 @@ public class Main {
             //ribbonScene(signBoard, 48);
             //flashFreshHotScene(signBoard, 8);
 
-            //iceCreamAnimation(signBoard, 16);
-            //threeConeScene(signBoard);
-            //fallingConeScene(signBoard, fallingCone, fallingConeText);
+            iceCreamAnimation(signBoard, 16);
+            threeConeScene(signBoard);
+            fallingConeScene(signBoard, fallingCone, fallingConeText);
             scrollHugeScene(signBoard, hugeCone);
         }
     }
