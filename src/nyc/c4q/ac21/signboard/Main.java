@@ -1,5 +1,6 @@
 package nyc.c4q.ac21.signboard;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class Main {
@@ -340,15 +341,565 @@ public class Main {
         }
     }
 
+    //Danny Methods
+    public static void iceCreamAnimation(SignBoard board, int cycles) {
+        int width = board.getWidth();
+        int leftPosition = width / 4 - 12;
+        int rightPosition = 2 * width / 4 - 7;
+        int y = board.getHeight() / 2;
+
+        for (int i = 0; i < cycles; i++) {
+            SignBoard.Frame frame = board.newFrame();
+
+            if (i % 5 == 0) {
+                frame.setWhite();
+                frame.write(leftPosition, y - 2, "IIIII  CCCC EEEEE");
+                frame.write(leftPosition, y - 1, "  I   CC    E    ");
+                frame.write(leftPosition, y,     "  I   C     EEEE");
+                frame.write(leftPosition, y + 1, "  I   CC    E    ");
+                frame.write(leftPosition, y + 2, "IIIII  CCCC EEEEE");
+            }
+            else if (i % 5 == 1){
+                setRandomColor(frame);
+                frame.write(rightPosition, y - 2, " CCCC  RRR    EEEEE   AAA   M     M");
+                frame.write(rightPosition, y - 1, "CC     R  RR  E      A   A  MM   MM");
+                frame.write(rightPosition, y,     "C      RRR    EEEE   AAAAA  M M M M");
+                frame.write(rightPosition, y + 1, "CC     R  R   E      A   A  M  M  M");
+                frame.write(rightPosition, y + 2, " CCCC  R   R  EEEEE  A   A  M     M");
+            }
+            else if (i % 5 == 2) {
+                frame.setWhite();
+                frame.write(leftPosition+5, y - 3, "III CCC EEE");
+                frame.write(leftPosition+5, y - 2, " I  C   EE ");
+                frame.write(leftPosition+5, y - 1, "III CCC EEE");
+
+            }
+            else if (i % 5 == 3) {
+                frame.setWhite();
+                frame.write(rightPosition+10, y - 4, "IIIII  CCCC EEEEE");
+                frame.write(rightPosition+10, y - 3, "  I   CC    E    ");
+                frame.write(rightPosition+10, y - 2, "  I   C     EEEE");
+                frame.write(rightPosition+10, y - 1, "  I   CC    E    ");
+                frame.write(rightPosition+10, y,     "IIIII  CCCC EEEEE");
+
+            }
+            else if (i % 5 == 4){
+                setRandomColor(frame);
+                frame.write(rightPosition - 2, y + 1, "CCC  RRR  EEE   A    M   M");
+                frame.write(rightPosition - 2, y + 2, "C    RRR  EE   AAA   MM MM");
+                frame.write(rightPosition - 2, y + 3, "CCC  R  R EEE A   A  M M M");
+            }
+
+            frame.finish(0.25);
+        }
+    }
+
+
+    public static void threeConeScene(SignBoard board) {
+
+        int width = board.getWidth();
+        int y = board.getHeight() / 2;
+
+        String str0 = "    ,'/ //\\ ";
+        String str1 = "   /// // /)";
+        String str2 = "  /// // //|";
+        String str3 = " (`: // /// ";
+        String str4 = "  `;`: ///  ";
+        String str5 = "  / /:`:/   ";
+        String str6 = " / /  `'    ";
+        String str7 = "(_/         ";
+
+        str0 = stringRepeat(str0, 6);
+        str1 = stringRepeat(str1, 6);
+        str2 = stringRepeat(str2, 6);
+        str3 = stringRepeat(str3, 6);
+        str4 = stringRepeat(str4, 6);
+        str5 = stringRepeat(str5, 6);
+        str6 = stringRepeat(str6, 6);
+        str7 = stringRepeat(str7, 6);
+
+        int i = 0;
+        for (int x = -str1.length(); x <= width; ++x) {
+            SignBoard.Frame frame = board.newFrame();
+
+            if (i == 4)
+                i = 0;
+
+            if (x >= width)
+                break;
+
+            if (x < 0) {
+                // Scrolling on to the left side.
+                setColor(frame, i+3);
+                frame.write(0, y - 4, str0.substring(-x));
+                setColor(frame, i+3);
+                frame.write(0, y - 3, str1.substring(-x));
+                setColor(frame, i+2);
+                frame.write(0, y - 2, str2.substring(-x));
+                setColor(frame, i+2);
+                frame.write(0, y - 1, str3.substring(-x));
+                setColor(frame, i+1);
+                frame.write(0, y,     str4.substring(-x));
+                setColor(frame, i+1);
+                frame.write(0, y + 1, str5.substring(-x));
+                setColor(frame, i+0);
+                frame.write(0, y + 2, str6.substring(-x));
+                setColor(frame, i+0);
+                frame.write(0, y + 3, str7.substring(-x));
+            }
+            else if (x + str1.length() <= width) {
+                setColor(frame, i+3);
+                frame.write(x, y - 4, str0);
+
+                setColor(frame, i+3);
+                frame.write(x, y - 3, str1);
+
+                setColor(frame, i+2);
+                frame.write(x, y - 2, str2);
+
+                setColor(frame, i+2);
+                frame.write(x, y - 1, str3);
+
+                setColor(frame, i+1);
+                frame.write(x, y,     str4);
+
+                setColor(frame, i+1);
+                frame.write(x, y + 1, str5);
+
+                setColor(frame, i+0);
+                frame.write(x, y + 2, str6);
+                setColor(frame, i+0);
+                frame.write(x, y + 3, str7);
+            }
+
+            else {
+                // Scrolling off the board.
+                setColor(frame, i+3);
+                frame.write(x, y - 4, str0.substring(0, width - x));
+                setColor(frame, i+3);
+                frame.write(x, y - 3, str1.substring(0, width - x));
+                setColor(frame, i+2);
+                frame.write(x, y - 2, str2.substring(0, width - x));
+                setColor(frame, i+2);
+                frame.write(x, y - 1, str3.substring(0, width - x));
+                setColor(frame, i+1);
+                frame.write(x, y,     str4.substring(0, width - x));
+                setColor(frame, i+1);
+                frame.write(x, y + 1, str5.substring(0, width - x));
+                setColor(frame, i+0);
+                frame.write(x, y + 2, str6.substring(0, width - x));
+                setColor(frame, i+0);
+                frame.write(x, y + 3, str7.substring(0, width - x));
+            }
+            if (-x % 4 == 0)
+                i++;
+            frame.finish(0.02);
+        }
+
+
+    }
+
+    public static void fallingConeScene(SignBoard board, FrameTextReader scene1, FrameTextReader scene2) {
+        int leftPosition = board.getWidth() / 2 - 24;
+        int rightPosition = board.getWidth() / 2 + 15;
+
+        //falling cone animation
+        int i = 0;
+        while (i < scene1.frameList.size()) {
+            SignBoard.Frame frame = board.newFrame();
+            setRandomColor(frame);
+
+            for (int j = 0; j < 8; j++) {
+
+                frame.write(rightPosition, j, scene1.frameList.get(i));
+                i++;
+            }
+
+            frame.finish(0.20);
+        }
+
+        //one free scoop words after falling cone animation
+        int cycles = 4;
+        i = 0;
+        while (i < scene2.frameList.size()) {
+            SignBoard.Frame frame = board.newFrame();
+            setRandomColor(frame);
+            int k = 8;
+            for (int j = 0; j < 8; j++) {
+                frame.write(leftPosition, j, scene2.frameList.get(i));
+
+                frame.write(rightPosition, j, scene1.frameList.get(scene1.frameList.size()-k));
+                k--;
+                i++;
+
+            }
+
+            if (i == scene2.frameList.size() && cycles != 0) {
+                i = 0;
+                cycles--;
+            }
+
+            frame.finish(.30);
+        }
+    }
+
+    public static void scrollHugeScene(SignBoard board, FrameTextReader scene1) {
+        int width = board.getWidth();
+        int y = board.getHeight();
+
+        for (int i = 0; i < scene1.frameList.size() + 8; i++) {
+            SignBoard.Frame frame = board.newFrame();
+            setRandomColor(frame);
+
+            if (i <= 6) {
+                //coming in from the bottom
+                int h = 7;
+                int f = i;
+                for (int g = 0; g <= i; g++) {
+                    frame.write(0, h, scene1.frameList.get(f));
+                    h--;
+                    f--;
+                }
+            }
+            else if (i < scene1.frameList.size()) {
+                //scrolling fully on the board
+                int k = 7;
+                for (int j = 0; j < 8; j++) {
+                    frame.write(0, j, scene1.frameList.get(i - k));
+                    k--;
+                }
+            }
+            else if (i >= scene1.frameList.size()) { //55
+                //scrolling out above the board
+                int h = 0;
+                int k = i - 7; //k = 55      55 - 7 = 48
+                for (int j = scene1.frameList.size() + 7; j > i; j--) { //j = 54+7 = 61, 61 > 55,
+                    frame.write(0, h, scene1.frameList.get(k));   //h = 0, k = 48
+                    h++;
+                    k++;
+                }
+            }
+            frame.finish(.02);
+        }
+    }
+
+    public static void setRandomColor(SignBoard.Frame frame) {
+        Random random = new Random();
+        int color = random.nextInt(4);
+        if (color == 0)
+            frame.setGreen();
+        else if (color == 1)
+            frame.setRed();
+        else if (color == 2)
+            frame.setWhite();
+        else
+            frame.setYellow();
+    }
+
+    public static void setColor(SignBoard.Frame frame, int i) {
+        if (i % 4 == 0)
+            frame.setGreen();
+        else if (i % 4 == 1)
+            frame.setRed();
+        else if (i % 4 == 2)
+            frame.setWhite();
+        else
+            frame.setYellow();
+    }
+
+    public static String stringRepeat(String str, int times) {
+        String result = "";
+        for (int i = 0; i < times; i++)
+            result = result + str;
+        return result;
+    }
+
+    //Jeff's Method
+    public static void DollarSign(SignBoard board) {
+        int width = board.getWidth();
+        int y = board.getHeight() / 2;
+
+        String str0 = "    _        _        _    ";
+        String str1 = " __|_|___ __|_|___ __|_|___";
+        String str2 = "(  _____/(  _____/(  _____/";
+        String str3 = "| (|_|__ | (|_|__ | (|_|__ ";
+        String str4 = "(_____  )(_____  )(_____  )";
+        String str5 = "/\\_|_|) |/\\_|_|) |/\\_|_|) |";
+        String str6 = "\\_______)\\_______)\\_______)";
+        String str7 = "   |_|      |_|      |_|   ";
+
+        for (int i = 0; i < 10; i++) {
+            SignBoard.Frame frame = board.newFrame();
+
+            Random random = new Random();
+
+            int color = random.nextInt(4);
+            if (color == 0)
+                frame.setGreen();
+            else if (color == 1)
+                frame.setRed();
+            else if (color == 2)
+                frame.setWhite();
+            else
+                frame.setYellow();
+
+            frame.write(i, y - 4, str0);
+            frame.write(i, y - 3, str1);
+            frame.write(i, y - 2, str2);
+            frame.write(i, y - 1, str3);
+            frame.write(i, y, str4);
+            frame.write(i, y + 1, str5);
+            frame.write(i, y + 2, str6);
+            frame.write(i, y + 3, str7);
+
+            frame.finish(0.065);
+
+        }
+    }
+
+    public static void FiveBucks(SignBoard board) {
+        int width = board.getWidth();
+        int y = board.getHeight() / 2;
+
+        String str0 = "    _       _______    _______  _______ ";
+        String str1 = " __|_|___  (  ____ \\  (  __   )(  __   )";
+        String str2 = "(  _____/  | (    \\/  | (  )  || (  )  |";
+        String str3 = "| (|_|__   | (____    | | /   || | /   |";
+        String str4 = "(_____  )  (_____ \\   | (/ /) || (/ /) |";
+        String str5 = "/\\_|_|) |        ) )  |   / | ||   / | |";
+        String str6 = "\\_______)  /\\____) )_ |  (__) ||  (__) |";
+        String str7 = "   |_|     \\______/(_)(_______)(_______)";
+        for (int i = 10; i < 25; i++) {
+            SignBoard.Frame frame = board.newFrame();
+
+
+            frame.setGreen();
+
+
+            frame.write(i, y - 4, str0);
+            frame.write(i, y - 3, str1);
+            frame.write(i, y - 2, str2);
+            frame.write(i, y - 1, str3);
+            frame.write(i, y, str4);
+            frame.write(i, y + 1, str5);
+            frame.write(i, y + 2, str6);
+            frame.write(i, y + 3, str7);
+
+            frame.finish(0.065);
+
+        }
+    }
+
+    public static void DollarSign2(SignBoard board) {
+        int width = board.getWidth();
+        int y = board.getHeight() / 2;
+
+        String str0 = "    _        _        _    ";
+        String str1 = " __|_|___ __|_|___ __|_|___";
+        String str2 = "(  _____/(  _____/(  _____/";
+        String str3 = "| (|_|__ | (|_|__ | (|_|__ ";
+        String str4 = "(_____  )(_____  )(_____  )";
+        String str5 = "/\\_|_|) |/\\_|_|) |/\\_|_|) |";
+        String str6 = "\\_______)\\_______)\\_______)";
+        String str7 = "   |_|      |_|      |_|   ";
+
+        for (int i = 45; i < 53; i++) {
+            SignBoard.Frame frame = board.newFrame();
+
+            Random random = new Random();
+
+            int color = random.nextInt(4);
+            if (color == 0)
+                frame.setGreen();
+            else if (color == 1)
+                frame.setRed();
+            else if (color == 2)
+                frame.setWhite();
+            else
+                frame.setYellow();
+
+            frame.write(i, y - 4, str0);
+            frame.write(i, y - 3, str1);
+            frame.write(i, y - 2, str2);
+            frame.write(i, y - 1, str3);
+            frame.write(i, y, str4);
+            frame.write(i, y + 1, str5);
+            frame.write(i, y + 2, str6);
+            frame.write(i, y + 3, str7);
+
+            frame.finish(0.065);
+
+        }
+    }
+
+    public static void Get(SignBoard board) {
+        int width = board.getWidth();
+        int y = board.getHeight() / 2;
+
+        String str0 = "   ___             _     ";
+        String str1 = "  / __|    ___    | |_   ";
+        String str2 = " | (_ |   / -_)   |  _|  ";
+        String str3 = "  \\___|   \\___|   _\\__|  ";
+        String str4 = "_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"| ";
+        String str5 = "\"`-0-0-'\"`-0-0-'\"`-0-0-' ";
+
+        for (int i = 0; i < 18; i++) {
+            SignBoard.Frame frame = board.newFrame();
+
+            Random random = new Random();
+
+            int color = random.nextInt(4);
+            if (color == 0)
+                frame.setGreen();
+            else if (color == 1)
+                frame.setRed();
+            else if (color == 2)
+                frame.setWhite();
+            else
+                frame.setYellow();
+
+            frame.write(i, y - 3, str0);
+            frame.write(i, y - 2, str1);
+            frame.write(i, y - 1, str2);
+            frame.write(i, y, str3);
+            frame.write(i, y + 1, str4);
+            frame.write(i, y + 2, str5);
+
+
+            frame.finish(0.07);
+
+        }
+    }
+
+    public static void Some(SignBoard board) {
+        int width = board.getWidth();
+        int y = board.getHeight() / 2;
+
+        String str0 = "   ___                              _    ";
+        String str1 = "  / __|    ___    _ __     ___     | |   ";
+        String str2 = "  \\__ \\   / _ \\  | '  \\   / -_)    |_|   ";
+        String str3 = "  |___/   \\___/  |_|_|_|  \\___|   _(_)_  ";
+        String str4 = "_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_| \"\"\" | ";
+        String str5 = "\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-' ";
+
+        for (int i = 24; i < 39; i++) {
+            SignBoard.Frame frame = board.newFrame();
+
+            Random random = new Random();
+
+            int color = random.nextInt(4);
+            if (color == 0)
+                frame.setGreen();
+            else if (color == 1)
+                frame.setRed();
+            else if (color == 2)
+                frame.setWhite();
+            else
+                frame.setYellow();
+
+            frame.write(i, y - 3, str0);
+            frame.write(i, y - 2, str1);
+            frame.write(i, y - 1, str2);
+            frame.write(i, y, str3);
+            frame.write(i, y + 1, str4);
+            frame.write(i, y + 2, str5);
+
+
+            frame.finish(0.07);
+
+        }
+    }
+
+    //Nesada's Methods
+    public static void airplaneScene(SignBoard board) {
+        int w = board.getWidth();
+        int y = board.getHeight() / 2;
+
+
+
+
+        String str0 = " ll------------------------------ll                                  ";
+        String str1 = "  ll           o __   ___         ll      __                         ";
+        String str2 = "   ll          |(___ (__/_         ll     | ll                       ";
+        String str3 = "      >__   __   ___   __   __ __    >----|  ll       ______         ";
+        String str4 = "   // (___ |  ' (__/_ (__( |  )  ) //     --- ll_____/**|_|_ll____  |";
+        String str5 = "  //       VANILLA  CHOCOLATE     //        ll_______ --------- __>-}";
+        String str6 = " //------------------------------//            /  ll_____|_____/   | ";
+        String str7 = "                                               *         |           ";
+
+        int i = 0;
+        for (int x = -str2.length(); x <= w; ++x) {
+            SignBoard.Frame frame = board.newFrame();
+
+
+            if (x >= w)
+                break;
+            frame.setRed();
+            if (x < 0) {
+                // Scrolling on to the left side.
+
+                frame.write(0, y - 4, str0.substring(-x));
+                frame.write(0, y - 3, str1.substring(-x));
+                frame.write(0, y - 2, str2.substring(-x));
+                frame.write(0, y - 1, str3.substring(-x));
+                frame.write(0, y, str4.substring(-x));
+                frame.write(0, y + 1, str5.substring(-x));
+                frame.write(0, y + 2, str6.substring(-x));
+                frame.write(0, y + 3, str7.substring(-x));
+            } else if (x + str1.length() <= w) {
+
+                frame.setYellow();
+                frame.write(x, y - 4, str0);
+                frame.write(x, y - 3, str1);
+                frame.write(x, y - 2, str2);
+                frame.write(x, y - 1, str3);
+                frame.write(x, y, str4);
+                frame.write(x, y + 1, str5);
+                frame.write(x, y + 2, str6);
+                frame.write(x, y + 3, str7);
+            } else {
+
+                frame.setRed();
+                // Scrolling off the board.
+                frame.write(x, y - 4, str0.substring(0, w - x));
+                frame.write(x, y - 3, str1.substring(0, w - x));
+                frame.write(x, y - 2, str2.substring(0, w - x));
+                frame.write(x, y - 1, str3.substring(0, w - x));
+                frame.write(x, y, str4.substring(0, w - x));
+                frame.write(x, y + 1, str5.substring(0, w - x));
+                frame.write(x, y + 2, str6.substring(0, w - x));
+                frame.write(x, y + 3, str7.substring(0, w - x));
+            }
+
+            frame.finish(0.02);
+        }
+    }
+
     //THIS IS WHERE METHODS GET ACTIVATED/DEACTIVATED
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         SignBoard signBoard = new SignBoard(8);
+        FrameTextReader fallingCone = new FrameTextReader("falling_cone.txt");
+        FrameTextReader fallingConeText = new FrameTextReader("falling_cone_words.txt");
+        FrameTextReader hugeCone = new FrameTextReader("huge_cone.txt");
 
         // Run the sign board forever.
         while (true) {
             scrollingCream(signBoard); //this scrolling text, left to middle, stop then right
             R2D2(signBoard); //this is R2D2
             iceCreamCones(signBoard); // text w/ two cones on the side
+
+            iceCreamAnimation(signBoard, 16);
+            threeConeScene(signBoard);
+            fallingConeScene(signBoard, fallingCone, fallingConeText);
+            scrollHugeScene(signBoard, hugeCone);
+
+            airplaneScene(signBoard);
+
+            DollarSign(signBoard);
+            FiveBucks(signBoard);
+            DollarSign2(signBoard);
+            Get(signBoard);
+            Some(signBoard);
         }
     }
 }
