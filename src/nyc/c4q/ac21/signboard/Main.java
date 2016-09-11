@@ -201,7 +201,8 @@ public class Main {
         Random random = new Random();
         int width = board.getWidth();
         int y = board.getHeight() / 2;
-        int middlePosition = width - 76;
+        //int middlePosition = width - 76;
+        int middlePosition = width - 105;
 
         String Str0 = "    .-\"`\'\"-. ";
         String Str1 = "  /          \\ ";
@@ -614,7 +615,7 @@ public class Main {
         return result;
     }
 
-    //Jeff's Method
+    
     public static void DollarSign(SignBoard board) {
         int width = board.getWidth();
         int y = board.getHeight() / 2;
@@ -810,7 +811,7 @@ public class Main {
         }
     }
 
-    //Nesada's Methods
+
     public static void airplaneScene(SignBoard board) {
         int w = board.getWidth();
         int y = board.getHeight() / 2;
